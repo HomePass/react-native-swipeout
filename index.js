@@ -108,13 +108,18 @@ var Swipeout = React.createClass({
       this.props.onOpen(this.props.sectionID, this.props.rowID)
     }
     this.refs.swipeoutContent.measure((ox, oy, width, height) => {
-      this.setState({
-        btnWidth: (width/5),
-        btnsLeftWidth: this.props.left ? (width/5)*this.props.left.length : 0,
-        btnsRightWidth: this.props.right ? (width/5)*this.props.right.length : 0,
-        swiping: true,
-        timeStart: (new Date()).getTime(),
-      })
+        const leftButtonsCount = (this.props.left && this.props.left.hasOwnProperty(length) ?
+            this.props.left.length : 1)
+        const rightButtonsCount = (this.props.right && this.props.right.hasOwnProperty(length) ?
+            this.props.right.length : 1)
+
+        this.setState({
+            btnWidth: (width/5),
+            btnsLeftWidth: this.props.left ? (width/5) * leftButtonsCount : 0,
+            btnsRightWidth: this.props.right ? (width/5) * rightButtonsCount : 0,
+            swiping: true,
+            timeStart: (new Date()).getTime(),
+        })
     })
   }
 , _handlePanResponderMove: function(e: Object, gestureState: Object) {
@@ -258,6 +263,11 @@ var Swipeout = React.createClass({
     var isRightVisible = posX < 0;
     var isLeftVisible = posX > 0;
 
+    const leftButtons = (this.props.left && this.props.left instanceof Array ?
+        this.props.left : [ this.props.left ])
+    const rightButtons = (this.props.right && this.props.right instanceof Array ?
+        this.props.right : [ this.props.right ])
+
     return (
       <View style={styleSwipeout}>
         <View
@@ -267,8 +277,8 @@ var Swipeout = React.createClass({
           {...this._panResponder.panHandlers}>
           {this.props.children}
         </View>
-        { this._renderButtons(this.props.right, isRightVisible, styleRight) }
-        { this._renderButtons(this.props.left, isLeftVisible, styleLeft) }
+        { this._renderButtons(leftButtons, isRightVisible, styleRight) }
+        { this._renderButtons(rightButtons, isLeftVisible, styleLeft) }
       </View>
     )},
 
