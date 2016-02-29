@@ -217,6 +217,13 @@ var Swipeout = React.createClass({
       styleSwipeout.push([{ backgroundColor: this.props.backgroundColor }])
     }
 
+    if (this.props.style) {
+        styleSwipeout = [
+            ...styleSwipeout,
+            ...this.props.style
+        ]
+    }
+
     var limit = -this.state.btnsRightWidth
     if (posX > 0) var limit = this.state.btnsLeftWidth
 
