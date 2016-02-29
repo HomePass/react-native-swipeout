@@ -213,6 +213,13 @@ var Swipeout = React.createClass({
       openedLeft: false,
     })
   }
+, reset: function() {
+    this.setState({
+        contentPos: 0,
+        openedRight: false,
+        openedLeft: false,
+    })
+  }
 , render: function() {
     var contentWidth = this.state.contentWidth
     var posX = this.getTweeningValue('contentPos')
