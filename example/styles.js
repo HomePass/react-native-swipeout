@@ -1,5 +1,5 @@
-var React = require('react-native')
-var {StyleSheet} = React
+import ReactNative from 'react-native'
+var {StyleSheet} = ReactNative
 
 var styles = StyleSheet.create({
   container: {
