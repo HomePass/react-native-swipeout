@@ -225,16 +225,13 @@ var Swipeout = React.createClass({
     var contentWidth = this.state.contentWidth
     var posX = this.getTweeningValue('contentPos')
 
-    var styleSwipeout = [styles.swipeout]
+    var styleSwipeout = []
     if (this.props.backgroundColor) {
       styleSwipeout.push([{ backgroundColor: this.props.backgroundColor }])
     }
 
     if (this.props.style) {
-        styleSwipeout = [
-            ...styleSwipeout,
-            ...this.props.style
-        ]
+        styleSwipeout.push(this.props.style)
     }
 
     var limit = -this.state.btnsRightWidth
@@ -292,6 +289,7 @@ var Swipeout = React.createClass({
 
     _onLayout: function(event) {
       var { width, height } = event.nativeEvent.layout;
+
       this.setState({
         contentWidth: width,
         contentHeight: height
