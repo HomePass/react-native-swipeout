@@ -45,7 +45,7 @@ var SwipeoutBtn = React.createClass({
       width: btn.width,
     }])
 
-    var styleSwipeoutBtnText = [styles.swipeoutBtnText]
+    var styleSwipeoutBtnText = (this.props.textStyle ? [this.props.textStyle] : [styles.swipeoutBtnText])
 
     //  apply text color
     if (btn.color) styleSwipeoutBtnText.push([{ color: btn.color }])
@@ -313,6 +313,7 @@ var Swipeout = React.createClass({
     _renderButton: function(btn, i) {
       return (
         <SwipeoutBtn
+            textStyle={this.props.textStyle}
             backgroundColor={btn.backgroundColor}
             color={btn.color}
             component={btn.component}
